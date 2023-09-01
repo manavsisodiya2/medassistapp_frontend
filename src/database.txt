@@ -1,0 +1,45 @@
+states
+------
+id
+statename
+
+city
+------
+id
+stateid
+cityname
+
+category
+--------
+categoryid
+categoryname
+categoryicon
+
+doctors
+-------
+categoryid fk
+id
+doctorname
+gender
+dob
+address
+stateid fk
+cityid fk
+emailid
+mobileno
+qualification
+photograph
+
+timings
+----------
+id pk
+doctorid fk textbox
+starttimings textbox
+endtimings textbox
+days checkbox
+status avl/not avl radio
+     
+
+
+
+
