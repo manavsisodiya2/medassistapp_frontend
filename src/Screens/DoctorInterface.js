@@ -325,15 +325,15 @@ export default function DoctorInterface(props) {
           <Grid item xs={3}>
             <FormControl fullWidth>
               <InputLabel>State</InputLabel>
-              <Select
-                error={formError.stateid}
-                onFocus={() => handleError("", "stateid")}
-                onChange={handleStateChange}
-                label="State"
-              >
-                <MenuItem>-Select State-</MenuItem>
-                {fillStates()}
-              </Select>
+                <Select
+                  error={formError.stateid}
+                  onFocus={() => handleError("", "stateid")}
+                  onChange={handleStateChange}
+                  label="State"
+                >
+                  <MenuItem>-Select State-</MenuItem>
+                  {fillStates()}
+                </Select>
               {formError.stateid ? (
                 <FormHelperText style={{ color: "red" }}>
                   {formError.stateid}
