@@ -12,6 +12,9 @@ import DisplayAllDoctor from "./DisplayAllDoctors";
 import PersonSearchIcon from '@mui/icons-material/PersonSearch';
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 import {Routes,Route,useNavigate} from "react-router-dom"
+import adminimage from "../assets/admin.jpeg"
+
+
 export default function AdminDashboard()
 {
 var navigate=useNavigate()
@@ -75,7 +78,7 @@ var navigate=useNavigate()
     <Grid item xs={2}>
      <Paper elevation={3} style={{width:200,margin:10,padding:10,display:'flex',flexDirection:'column',borderRadius:20,alignItems:'center'}}>
        <div>
-        <img src="admin.jpeg" style={{width:80,height:80,borderRadius:40}}/>
+        <img src={adminimage} style={{width:80,height:80,borderRadius:40}}/>
        </div>
        <div style={{fontWeight:14,fontWeight:'bold'}}>Thomas Cook</div>
        <div style={{fontWeight:10,fontWeight:300}}>+919301123085</div> 
@@ -93,7 +96,7 @@ var navigate=useNavigate()
   <Grid item xs={10}>
   <Routes>
   <Route element={<DoctorInterface/>} path="/doctorinterface"/>
-          <Route element={<DisplayAllDoctor/>} path="/displayalldoctor"/>
+  <Route element={<DisplayAllDoctor/>} path="/displayalldoctor"/>
   </Routes>
   </Grid>
   </Grid>

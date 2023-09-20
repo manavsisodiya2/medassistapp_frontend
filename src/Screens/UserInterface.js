@@ -9,9 +9,6 @@ import {
   Grid,
   FormControl,
   TextField,
-  InputLabel,
-  Select,
-  MenuItem,
   FormHelperText,
 } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
@@ -42,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
 export default function UserInterface(props){
   const [username, setusername] = useState("");
   const [Gender, setGender] = useState("");
+  const [city, setCity] = useState([]);
   const [dob, setDOB] = useState("1/1/1");
   const [emailId, setEmailId] = useState("");
   const [mobileno, setMobileno] = useState("");
@@ -66,6 +64,10 @@ export default function UserInterface(props){
       handleError("Select Gender", "gender");
       error = true;
     }
+    if (city.length == 0) {
+      handleError("please enter city name", "city");
+      error = true;
+    }
     if (dob.length == 0) {
       handleError("Pls input DOB", "dob");
       error = true;
@@ -82,12 +84,14 @@ export default function UserInterface(props){
     return error;
   };
   
+  
   const handleSubmit = async () => {
     if (!isError()) {
       var formData = new FormData();
       formData.append("username", username);
       formData.append("gender", Gender);
       formData.append("dob", dob);
+      formData.append("city", city);
       formData.append("emailid", emailId);
       formData.append("mobileno", mobileno);
       formData.append("password", `${username}##`);
@@ -117,26 +121,37 @@ export default function UserInterface(props){
     setMobileno("");
     setEmailId("");
     setDOB("1/1/1");
+    setCity("");
+    
       
     };
 
+  
 
   var classes=useStyles();
   return(
   <div className={classes.container}>
   <div className={classes.box}>
       <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <Heading
+              color="#079992"
+              icon="Doctor.webp"
+              text="Doctor Register"
+            />
+          </Grid>
           
-          <Grid item xs={6}>
+          <Grid item xs={12}>
               <TextField
-              error={formError.doctorname}
-              onFocus={() => handleError("", "doctorname")}
+              error={formError.username}
+              onFocus={() => handleError("", "username")}
               onChange={(event) => setusername(event.target.value)}
               label="User Name"
               value={username}
-              helperText={formError.doctorname}
+              helperText={formError.username}
               fullWidth
               />
+
           </Grid>
           
           <Grid item xs={6}>
@@ -177,70 +192,73 @@ export default function UserInterface(props){
             )}
             </FormControl>
           </Grid>
-          
-          {/* <Grid item xs={6}>
-              <TextField
-              // error={formError.doctorname}
-              // onFocus={() => handleError("", "doctorname")}
-              // onChange={(event) => setDoctorName(event.target.value)}
-              label="city"
-              
-              // helperText={formError.doctorname}
-              fullWidth
-              />
-          </Grid> */}
-          
+                    
           <Grid item xs={6}>
               <TextField
-              error={formError.dob}
-              onFocus={() => handleError("", "dob")}
-              onChange={(event) => setDOB(event.target.value)}
-              value={dob}
-              type="date"
-              label="Date of Birth"
-              helperText={formError.dob}
-              fullWidth
+                error={formError.dob}
+                onFocus={() => handleError("", "dob")}
+                onChange={(event) => setDOB(event.target.value)}
+                value={dob}
+                type="date"
+                label="Date of Birth"
+                helperText={formError.dob}
+                fullWidth
               />
-          </Grid>
-          
-          <Grid item xs={3}>
-          <TextField
-            error={formError.emailid}
-            onFocus={() => handleError("", "emailid")}
-            value={emailId}
-            label="Email Id"
-            fullWidth
-            onChange={(event) => setEmailId(event.target.value)}
-            helperText={formError.emailid}
-              />
-          </Grid>
-          
-          <Grid item xs={3}>
-              <TextField
-              error={formError.mobileno}
-              onFocus={() => handleError("", "mobileno")}
-              value={mobileno}
-              onChange={(event) => setMobileno(event.target.value)}
-              label="Mobile Number"
-              helperText={formError.mobileno}
-              fullWidth
-              />
-          </Grid>
-          
-          <Grid item xs={6}>
-              <Button 
-              onClick={handleSubmit} 
-              fullWidth variant="contained">
-              Submit
-              </Button>
           </Grid>
 
           <Grid item xs={6}>
-              <Button 
-              onClick={() => handleReset()} 
-              fullWidth variant="contained">
-              Reset
-              </Button>
+            <TextField
+              error={formError.city}
+              onFocus={() => handleError("", "city")}
+              onChange={(event) => setCity(event.target.value)}
+              label="city"
+              value={city}
+              helperText={formError.city}
+              fullWidth>
+
+            </TextField>
+
+          </Grid>
+          
+          <Grid item xs={6}>
+            <TextField
+              error={formError.emailid}
+              onFocus={() => handleError("", "emailid")}
+              value={emailId}
+              label="Email Id"
+              fullWidth
+              onChange={(event) => setEmailId(event.target.value)}
+              helperText={formError.emailid}
+                />
+          </Grid>
+          
+          <Grid item xs={6}>
+            <TextField
+            error={formError.mobileno}
+            onFocus={() => handleError("", "mobileno")}
+            value={mobileno}
+            onChange={(event) => setMobileno(event.target.value)}
+            label="Mobile Number"
+            helperText={formError.mobileno}
+            fullWidth
+            />
+          </Grid>
+          
+          
+          <Grid item xs={6}>
+            <Button 
+            onClick={handleSubmit} 
+            fullWidth variant="contained">
+            Submit
+            </Button>
+          </Grid>
+
+          <Grid item xs={6}>
+            <Button 
+            onClick={() => handleReset()} 
+            fullWidth variant="contained">
+            Reset
+            </Button>
           </Grid>
           
 

@@ -31,7 +31,7 @@ const UseStyles = makeStyles((theme) => ({
 }));
 
 
-export default function Timings(props) {
+export default function DoctorTimingInterface(props) {
 
   const [doctorId, setdoctorId] = useState("");
   const [startTime, setstartTime] = useState("00/00");
