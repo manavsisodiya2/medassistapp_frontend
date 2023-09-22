@@ -13,8 +13,6 @@ import PersonSearchIcon from '@mui/icons-material/PersonSearch';
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 import {Routes,Route,useNavigate} from "react-router-dom"
 import adminimage from "../assets/admin.jpeg"
-
-
 export default function AdminDashboard()
 {
 var navigate=useNavigate()

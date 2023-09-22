@@ -1,19 +1,6 @@
 import { useEffect, useState } from "react";
-import {
-  Avatar,
-  Button,
-  Radio,
-  RadioGroup,
-  FormControlLabel,
-  FormLabel,
-  Grid,
-  FormControl,
-  TextField,
-  InputLabel,
-  Select,
-  MenuItem,
-  FormHelperText,
-} from "@mui/material";
+import {Avatar,Button,Radio,RadioGroup,FormControlLabel,FormLabel,Grid,FormControl,TextField,InputLabel,Select,MenuItem,FormHelperText,}
+from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
 import Heading from "../Component/Heading";
 import Swal from "sweetalert2";

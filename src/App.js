@@ -6,7 +6,8 @@ import DisplayAllTimings from "./Screens/DisplayAllTimings"
 import AdminLogin from "./Screens/AdminLogin";
 import AdminDashboard from "./Screens/AdminDashboard";
 import QuestionInterface from "./Screens/QuestionInterface";
-import UserInterface from "./Screens/UserInterface"
+import QueryQuestions from "./Screens/QueryQuestionsInterface";
+import UserInterface from "./Screens/UserInterface";
 function App() {
   return (
    <div>
@@ -18,6 +19,7 @@ function App() {
           <Route element={<QuestionInterface/>} path="/questioninterface"/>
           <Route element={<AdminDashboard/>} path="/admindashboard/*"/>
           <Route element={<UserInterface/>} path="/UserInterface"/>
+          <Route element={<QueryQuestions/>} path="/queryquestion"/>
       </Routes>
     </Router>
    </div>  

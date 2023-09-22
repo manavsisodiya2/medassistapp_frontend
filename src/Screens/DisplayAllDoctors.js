@@ -22,8 +22,8 @@ import makeStyles from "@mui/styles/makeStyles";
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
- 
-import DialogTitle from '@mui/material/DialogTitle';
+import adddoctor from '../assets/adddoctor.png'
+import doctorimage from '../assets/doctor.webp'
 import Heading from "../Component/Heading";
 import Swal from "sweetalert2";
 
@@ -45,19 +45,23 @@ const useStyles = makeStyles((theme) => ({
     padding: 15,
   },
   container: {
-    width: "100vw",
-    height: "100vh",
-    background: "#78e08f",
+    width: "100%",
+    height: "90vh",
+    background: "#f2f2f2",
     display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    
+    
   },
   box: {
-    width: 1200,
-    height: "auto",
+    width: 1000,
+    height:'80%' ,
     background: "#fff",
     borderRadius: 10,
     padding: 15,
+    marginLeft:'10%',
+    marginTop:'2%'
+  
+
   },
 }));
 
@@ -339,13 +343,50 @@ return (
     <div className={classes.rootcontainer}>
       <div className={classes.rootbox}>
         <Grid container spacing={3}>
-          <Grid item xs={12}>
+       
+          <Grid item xs={6}>
             <Heading
               color="#079992"
               icon="Doctor.webp"
               text="Doctor Register"
             />
           </Grid>
+          <Grid
+            item
+            xs={6}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "right",
+            }}
+          >
+          <Button  style={{position:'relative',background:'#ffff'}} variant="text" component="label">
+              
+              <input
+                error={formError.photograph}
+                onFocus={() => handleError("", "photograph")}
+                onChange={handlePhotograph}
+                type="file"
+                hidden
+                accept="image/*"
+                multiple
+              />
+            
+            {over?<div style={{display:'flex',justifyContent:'center',alignItems:'center',bottom:3,left:3,position:'absolute',width:26,height:26,borderRadius:13, background:'#f2f2f2',zIndex:2}}><EditRoundedIcon style={{color:'#000', fontSize:16}} /></div>:<></> } 
+
+            <Avatar
+             onMouseOver={()=>setOver(true)}
+             onMouseLeave={()=>setOver(false)}
+              
+              alt="Doctor Image"
+              src={photograph.url}
+              variant="circular"
+              sx={{ width: 80, height: 80 }}
+            />
+       </Button>
+            {btnStatus?saveCancel():<></>}
+          </Grid>
+
           <Grid item xs={6}>
             <FormControl fullWidth>
               <InputLabel>Category</InputLabel>
@@ -523,53 +564,8 @@ return (
             />
           </Grid>
 
-          <Grid item xs={6}>
-            <Button fullWidth variant="contained" component="label">
-              Upload Doctor Image
-              <input
-                error={formError.photograph}
-                onFocus={() => handleError("", "photograph")}
-                onChange={handlePhotograph}
-                type="file"
-                hidden
-                accept="image/*"
-                multiple
-              />
-            </Button>
-            {formError.photograph ? (
-              <FormHelperText style={{ color: "red" }}>
-                {formError.photograph}
-              </FormHelperText>
-            ) : (
-              <></>
-            )}
-          </Grid>
-          <Grid
-            item
-            xs={6}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-          >
-            <div  style={{position:'relative'}}>
-            
-            {over?<div style={{display:'flex',justifyContent:'center',alignItems:'center',bottom:3,left:3,position:'absolute',width:26,height:26,borderRadius:13, background:'#ffff',zIndex:2}}><EditRoundedIcon size={2}/></div>:<></> } 
-
-            <Avatar
-             onMouseOver={()=>setOver(true)}
-             onMouseLeave={()=>setOver(false)}
-              
-              alt="Doctor Image"
-              src={photograph.url}
-              variant="rounded"
-              sx={{ width: 56, height: 56 }}
-            />
-            </div>
-            {btnStatus?saveCancel():<></>}
-          </Grid>
-
+        
+         
             </Grid>
       </div>
     </div>
@@ -609,9 +605,20 @@ const showDoctorDetails=()=>{
 
   function showDoctorList() {
     return (
+      <Grid container spacing={2}> 
+      <Grid item xs={12}>
+      <Heading
+              color="#079992"
+              icon={doctorimage}
+              text="Doctor Register"
+              linkimage={adddoctor}
+              link={'/admindashboard/doctorinterface'}
+            />
+      </Grid>  
+      <Grid item xs={12}>
       <MaterialTable
-        title="Doctor List"
-        columns={[
+        title=''
+         columns={[
           { title: 'Doctor',render:(rowData)=><div><div>{rowData.id}/{rowData.doctorname}</div><div>{rowData.gender}</div></div> },
           { title: 'Specialization', render:(rowData)=><div>{rowData.category.categoryname}</div> },
           { title: 'Birth', field:'dob'},
@@ -639,6 +646,8 @@ const showDoctorDetails=()=>{
           }
         ]}
       />
+      </Grid>
+      </Grid>
     )
   }
 
