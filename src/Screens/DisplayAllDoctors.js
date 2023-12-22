@@ -32,7 +32,6 @@ const useStyles = makeStyles((theme) => ({
   rootcontainer: {
     width: "auto",
     height: "auto",
-    
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -46,8 +45,8 @@ const useStyles = makeStyles((theme) => ({
   },
   container: {
     width: "100%",
-    height: "90vh",
-    background: "#f2f2f2",
+    height: "100vh",
+    background: "#a5b1c2",
     display: "flex",
     
     

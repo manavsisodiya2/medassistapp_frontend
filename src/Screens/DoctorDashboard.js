@@ -13,11 +13,16 @@ import PersonSearchIcon from '@mui/icons-material/PersonSearch';
 import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
 import {Routes,Route,useNavigate} from "react-router-dom"
 import adminimage from "../assets/admin.jpeg"
-import ListofDoctors from "./ListofDoctors";
-import UserRegistration from "./UserRegistration"
+import QueryQuestionInterface from "./QueryQuestionsInterface";
+import QuestionInterface from "./QuestionInterface";
+import { imageURL } from "../Services/FetchDjangoServices";
 import PatientList from "./PatientList";
-export default function AdminDashboard()
+import PrescriptionInterface  from "./PrescriptionInterface"
+import Prescriptionpdf from "./Prescriptionpdf"
+export default function DoctorDashboard()
 {
+ var doctor=JSON.parse(localStorage.getItem('DOCTOR'))    
+ 
 var navigate=useNavigate()
  function menuList() {
   return (
@@ -25,35 +30,28 @@ var navigate=useNavigate()
       <nav aria-label="main mailbox folders">
         <List>
           <ListItem disablePadding>
-            <ListItemButton onClick={()=>navigate('/admindashboard/doctorinterface')}>
+            <ListItemButton onClick={()=>navigate('/doctordashboard/questioninterface')}>
               <ListItemIcon>
                 <LocalHospitalIcon />
               </ListItemIcon>
-              <ListItemText primary="Add Doctor" />
+              <ListItemText primary="Add Questions" />
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton  onClick={()=>navigate('/admindashboard/UserRegistration')}>
+            <ListItemButton onClick={()=>navigate('/doctordashboard/queryquestioninterface')}>
               <ListItemIcon>
-                <PersonSearchIcon/>
+                <LocalHospitalIcon />
               </ListItemIcon>
-              <ListItemText primary="Add Patient" />
+              <ListItemText primary="Add Options" />
             </ListItemButton>
           </ListItem>
+      
           <ListItem disablePadding>
-            <ListItemButton  onClick={()=>navigate('/admindashboard/displayalldoctor')}>
+            <ListItemButton onClick={()=>navigate('/doctordashboard/patientlist')}>
               <ListItemIcon>
                 <PersonSearchIcon/>
               </ListItemIcon>
-              <ListItemText primary="Manage Doctors" />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton  onClick={()=>navigate('/admindashboard/patientlist')}>
-              <ListItemIcon>
-                <PersonSearchIcon/>
-              </ListItemIcon>
-              <ListItemText primary="patients" />
+              <ListItemText primary="Patient" />
             </ListItemButton>
           </ListItem>
         </List>
@@ -61,8 +59,8 @@ var navigate=useNavigate()
       <Divider />
       <nav aria-label="secondary mailbox folders">
         <List>
-        <ListItem disablePadding>
-            <ListItemButton  onClick={()=>navigate('/adminlogin')}>
+          <ListItem disablePadding>
+            <ListItemButton  onClick={()=>navigate('/doctorlogin')}>
               <ListItemText primary="Sign out" />
             </ListItemButton>
           </ListItem>
@@ -87,8 +85,8 @@ var navigate=useNavigate()
         
          <div style={{fontWeight:'bold',fontSize:26}}>Medassist</div>
          <IconButton  onClick={()=>navigate('/main')} style={{color:'#fff',marginLeft:'auto'}}>
-        <LogoutRounded />
-      </IconButton>
+  <LogoutRounded />
+</IconButton>
          </Toolbar>   
       </AppBar>
     </Box>
@@ -100,11 +98,11 @@ var navigate=useNavigate()
     <Grid item xs={2}>
      <Paper elevation={3} style={{width:200,margin:10,padding:10,display:'flex',flexDirection:'column',borderRadius:20,alignItems:'center'}}>
        <div>
-        <img src={adminimage} style={{width:80,height:80,borderRadius:40}}/>
+        <img src={`${imageURL}${doctor.photograph}`} style={{width:80,height:80,borderRadius:40}}/>
        </div>
-       <div style={{fontWeight:14,fontWeight:'bold'}}>Thomas Cook</div>
-       <div style={{fontWeight:10,fontWeight:300}}>+919301123085</div> 
-       <div style={{fontWeight:10,fontWeight:300}}>thomascook@gmail.com</div>
+       <div style={{fontWeight:14,fontWeight:'bold'}}>{doctor.doctorname}</div>
+       <div style={{fontWeight:10,fontWeight:300}}>+91{doctor.mobileno}</div> 
+       <div style={{fontWeight:10,fontWeight:300}}>{doctor.emailid}</div>
        <div>
         {menuList()}
         </div> 
@@ -116,12 +114,12 @@ var navigate=useNavigate()
   </Grid>
 
   <Grid item xs={10}>
- 
   <Routes>
-  <Route element={<DoctorInterface/>} path="/doctorinterface"/>
-  <Route element={<UserRegistration/>} path="/UserRegistration"/>
-  <Route element={<DisplayAllDoctor/>} path="/displayalldoctor"/>
+  <Route element={<QuestionInterface/>} path="/questioninterface"/>
+  <Route element={<QueryQuestionInterface/>} path="/queryquestioninterface"/>
   <Route element={<PatientList/>} path="/patientlist"/>
+  <Route element={<PrescriptionInterface/>} path="/ps"/>
+  <Route element={<Prescriptionpdf/>} path="/ppdc"/>
   
   </Routes>
   </Grid>

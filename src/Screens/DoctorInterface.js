@@ -1,29 +1,47 @@
 import { useEffect, useState } from "react";
-import {Avatar,Button,Radio,RadioGroup,FormControlLabel,FormLabel,Grid,FormControl,TextField,InputLabel,Select,MenuItem,FormHelperText,}
-from "@mui/material";
+import {
+  Avatar,
+  Button,
+  Radio,
+  RadioGroup,
+  FormControlLabel,
+  FormLabel,
+  Grid,
+  FormControl,
+  TextField,
+  InputLabel,
+  Select,
+  MenuItem,
+  FormHelperText,
+} from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
 import Heading from "../Component/Heading";
 import Swal from "sweetalert2";
-
+import doctorimage from "../assets/doctor.webp" 
+import listdoctor from "../assets/listdoctor.png"
 import { serverURL, getData, postData } from "../Services/FetchDjangoServices";
 import { RestaurantOutlined } from "@mui/icons-material";
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    width: "100vw",
+    width: "auto",
     height: "100vh",
-    background: "#78e08f",
+    background: "#a5b1c2",
     display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    alignItems:"center",
+    justifyContent:"center"
+    
+    
   },
   box: {
-    width: 800,
-    height: "auto",
+    width: 1000,
+    height:'80%' ,
     background: "#fff",
     borderRadius: 10,
     padding: 15,
-  },
+    // marginLeft:'10%',
+    // marginTop:'2%'
+    },
 }));
 
 export default function DoctorInterface(props) {
@@ -139,7 +157,16 @@ export default function DoctorInterface(props) {
       return <MenuItem value={item.id}>{item.categoryname}</MenuItem>;
     });
   };
-
+  const show=()=>{
+  
+    var x=new Array(4)
+    x.fill(0)
+    return x.map((item,index)=>{
+       
+      return <TextField label={"Option"+index}/>
+    }) 
+    
+  }
   const fetchAllCity = async (sid) => {
     var body = { id: sid };
 
@@ -182,7 +209,7 @@ export default function DoctorInterface(props) {
       formData.append("emailid", emailId);
       formData.append("mobileno", mobileno);
       formData.append("photograph", photograph.bytes);
-      formData.append("password", `${doctorName}##`);
+      formData.append("password", `${doctorName}`);
 
       var result = await postData("doctorsubmit", formData);
       if (result.status) {
@@ -210,8 +237,10 @@ export default function DoctorInterface(props) {
           <Grid item xs={12}>
             <Heading
               color="#079992"
-              icon="Doctor.webp"
+              icon={doctorimage}
               text="Doctor Register"
+              linkimage={listdoctor}
+              link={'/admindashboard/displayalldoctor'}
             />
           </Grid>
           <Grid item xs={6}>
@@ -312,15 +341,15 @@ export default function DoctorInterface(props) {
           <Grid item xs={3}>
             <FormControl fullWidth>
               <InputLabel>State</InputLabel>
-                <Select
-                  error={formError.stateid}
-                  onFocus={() => handleError("", "stateid")}
-                  onChange={handleStateChange}
-                  label="State"
-                >
-                  <MenuItem>-Select State-</MenuItem>
-                  {fillStates()}
-                </Select>
+              <Select
+                error={formError.stateid}
+                onFocus={() => handleError("", "stateid")}
+                onChange={handleStateChange}
+                label="State"
+              >
+                <MenuItem>-Select State-</MenuItem>
+                {fillStates()}
+              </Select>
               {formError.stateid ? (
                 <FormHelperText style={{ color: "red" }}>
                   {formError.stateid}
@@ -436,6 +465,7 @@ export default function DoctorInterface(props) {
           </Grid>
         </Grid>
       </div>
+ 
     </div>
   );
 }

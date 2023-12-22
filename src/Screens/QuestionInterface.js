@@ -8,27 +8,27 @@ import { serverURL, getData, postData } from "../Services/FetchDjangoServices";
 import { FormControl, Grid, InputLabel, MenuItem, Select, TextField,Button } from "@mui/material";
 const useStyles = makeStyles((theme) => ({
   container: {
-    width: "100vw",
-    height: "100vh",
+    width: "100%",
+    height: "91vh",
     background: "#74b9ff",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
   },
   box: {
-    width: "60%",
+    width: "50%",
     minHeight: "auto",
     background: "#ffff",
     borderRadius: 10,
     padding: "1%",
   },
 }));
-export default function Questions() {
+export default function QuestionInterface() {
   const [category, setCategory] = useState([]);
-
+  var doctor=JSON.parse(localStorage.getItem('DOCTOR'))    
   // ------------------ Question Submit-------------------------
   const [categoryId, setCategoryId] = useState("");
-  const [doctorId,setDoctorId]=useState("");
+  const [doctorId,setDoctorId]=useState(doctor.id);
   const [question,setQuestion]=useState("");
  function handleReset(){
   alert("Hello!")
@@ -38,6 +38,7 @@ export default function Questions() {
   }
   const handleSubmit=async()=>{
     var formdata= new FormData();
+
     formdata.append("doctor",doctorId);
     formdata.append('category',categoryId);
     formdata.append('question',question);

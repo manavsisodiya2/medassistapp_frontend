@@ -6,8 +6,14 @@ import DisplayAllTimings from "./Screens/DisplayAllTimings"
 import AdminLogin from "./Screens/AdminLogin";
 import AdminDashboard from "./Screens/AdminDashboard";
 import QuestionInterface from "./Screens/QuestionInterface";
+import UserRegistration from "./Screens/UserRegistration";
 import QueryQuestions from "./Screens/QueryQuestionsInterface";
-import UserInterface from "./Screens/UserInterface";
+import DoctorLogin from "./Screens/DoctorLogin";
+import DoctorDashboard from "./Screens/DoctorDashboard";
+import PatientLogin from "./Screens/PatientLogin";
+import PatientDashboard from "./Screens/PatientDashboard";
+import ListofDoctors from "./Screens/ListofDoctors";
+import Main from "./Screens/main";
 function App() {
   return (
    <div>
@@ -16,10 +22,17 @@ function App() {
           
           <Route element={<DisplayAllTimings/>} path="/displayalltimings"/>
           <Route element={<AdminLogin/>} path="/adminlogin"/>
-          <Route element={<QuestionInterface/>} path="/questioninterface"/>
+          <Route element={<UserRegistration/>} path="/userregistration"/>
+          <Route element={<PatientLogin/>} path="/patientlogin"/>
           <Route element={<AdminDashboard/>} path="/admindashboard/*"/>
-          <Route element={<UserInterface/>} path="/UserInterface"/>
-          <Route element={<QueryQuestions/>} path="/queryquestion"/>
+          <Route element={<DoctorLogin/>} path="/doctorlogin"/>
+          <Route element={<DoctorDashboard/>} path="/doctordashboard/*"/>
+          <Route element={<PatientDashboard/>} path="/patientdashboard/*"/>
+          <Route element={<ListofDoctors/>} path="/listdoctors"/>
+          <Route element={<DoctorInterface/>} path="/doctorinterface"/>
+          <Route element={<Main/>} path="/main/*"/>
+        
+           
       </Routes>
     </Router>
    </div>  

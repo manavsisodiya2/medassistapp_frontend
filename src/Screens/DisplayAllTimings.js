@@ -43,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   box: {
-    width: "80%",
+    width: "70%",
     height: "auto",
     background: "#ffff",
     borderRadius: 10,

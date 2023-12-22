@@ -8,8 +8,8 @@ import { serverURL, getData, postData } from "../Services/FetchDjangoServices";
 import { FormControl, Grid, InputLabel, MenuItem, Select, TextField,Button } from "@mui/material";
 const useStyles = makeStyles((theme) => ({
   container: {
-    width: "100vw",
-    height: "100vh",
+    width: "100%",
+    height: "91vh",
     background: "#74b9ff",
     display: "flex",
     justifyContent: "center",
@@ -23,17 +23,19 @@ const useStyles = makeStyles((theme) => ({
     padding: "1%",
   },
 }));
-export default function QueryQuestions() {
+export default function QueryQuestionInterface() {
+  var doctor=JSON.parse(localStorage.getItem('DOCTOR'))    
   const [subQuestionsNumbers,setSubQuestionsNumbers]=useState(0)
   const [category, setCategory] = useState([]);
   const [question,setQuestion]=useState([]);
 
   // ----------- subquestions submit ---------------------------
   const [categoryId,setCategoryId]=useState('');
-  const [doctorId,setDoctorId]=useState('')
+  const [doctorId,setDoctorId]=useState(doctor.id)
   const [numberOfQuestions,setNumberOfQuestions]=useState('')
   const [questionId,setQuestionId]=useState('')
   const [options,setoptions]=useState({})
+  const [questionText,setQuestionText]=useState('')
 
   const handleTextChange=(event,index)=>{
     // setoptions((prev)=>({...prev,[index+1]:event.target.value}))
@@ -49,9 +51,10 @@ export default function QueryQuestions() {
     var body={
         category:categoryId,
         doctor:doctorId,
+        subquestiontext:questionText,
         subquestionnumber:subQuestionsNumbers.toString(),
         question:questionId,
-        subquestion:JSON.stringify(options)
+        subquestion:Object.values(options)+""
     }
     console.log(body)
     var result=await postData('subquestionsubmit',body)
@@ -133,6 +136,7 @@ export default function QueryQuestions() {
               </Select>
             </FormControl>
           </Grid>
+         
           <Grid item xs={6}>
             <FormControl fullWidth>
               <InputLabel>Question Category</InputLabel>
@@ -158,6 +162,9 @@ export default function QueryQuestions() {
               </Select>
             </FormControl>
           </Grid>
+          <Grid item xs={12} >
+          <TextField   label="Sub Question" onChange={(event)=>setQuestionText(event.target.value)} fullWidth/>
+          </Grid> 
           <Grid item xs={12} container spacing={3}>
             {showTextField()}
           </Grid>

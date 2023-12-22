@@ -4,12 +4,14 @@ var imageURL='http://127.0.0.1:8000'
 
 const getData=async(url)=>{
   try{  
+ 
     var response= await axios.get(`${serverURL}/${url}`)
     var data=response.data
     return(data)
   }
   catch(e)
   { console.log(e)
+    alert(e)
     return null
   }
 }
